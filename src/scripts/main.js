@@ -25,13 +25,10 @@ const getPhones = (url) => {
   });
 };
 
-const getPhonesDetails = (list) => {
-  const listOfPhones = list.map(phone => phone.id);
-
-  const preparedList = listOfPhones.map(
+const getPhonesDetails = (ids) => {
+  const preparedList = ids.map(phone => phone.id).map(
     phoneId => fetch(`${detailsUrl}${phoneId}.json`)
-      .then(response => response.json()
-      )
+      .then(response => response.json())
   );
 
   return Promise.all(preparedList);
