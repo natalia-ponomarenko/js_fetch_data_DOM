@@ -17,7 +17,8 @@ const getPhones = (url) => {
 
   return new Promise(function(resolve, reject) {
     fetch(url)
-      .then(response => resolve(response.json()));
+      .then(response => response.json())
+      .then(list => resolve(list.map(phone => phone.id)));
 
     setTimeout(() => {
       reject(new Error('Error!'));
@@ -26,9 +27,10 @@ const getPhones = (url) => {
 };
 
 const getPhonesDetails = (ids) => {
-  const preparedList = ids.map(phone => phone.id).map(
+  const preparedList = ids.map(
     phoneId => fetch(`${detailsUrl}${phoneId}.json`)
-      .then(response => response.json())
+      .then(response => response.json()
+      )
   );
 
   return Promise.all(preparedList);
