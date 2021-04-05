@@ -29,8 +29,7 @@ const getPhonesDetails = (list) => {
   const listOfPhones = list.map(phone => phone.id);
 
   const preparedList = listOfPhones.map(
-    phoneId => fetch(
-      `${detailsUrl}${phoneId}.json`)
+    phoneId => fetch(`${detailsUrl}${phoneId}.json`)
       .then(response => response.json()
       )
   );
